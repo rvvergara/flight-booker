@@ -1,0 +1,11 @@
+<h1>Flights Here</h1>
+
+<%= form_for(:flight, url: flights_path, method: :get) do |f|%>
+  <div class="form-group">
+    <%= label_tag :date %>
+    <%= date_field_tag :date %>
+    <%= label_tag :time %>
+    <%= time_field_tag :time %>
+    <%= f.submit "Search Flights", class:"btn btn-primary"%>
+  </div>
+<% end %>
