@@ -1,0 +1,14 @@
+<% if !@flights.nil? %>
+  <% if @flights.any? %>
+    <ul>
+      <% @flights.each do |flight|%>
+        <% if !flight.nil? %>
+          <li>
+            <%= render partial: "flight_selection_form", locals:{flight:flight} %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+

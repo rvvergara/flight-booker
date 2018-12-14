@@ -1,15 +1,5 @@
-<h1>Flights Here</h1>
+<h1>Flights Booking</h1>
 
-<%= render "searches/search_form"%>
-<h1>Flight Search Results</h1>
+<%= render "search_form"%>
 
-<h4>Search results:</h4>
-<% if @flights.any? %>
-  <ul>
-    <% @flights.each do |flight|%>
-      <% if !flight.nil? %>
-        <li><%= flight.flight_code%></li>
-      <% end %>
-    <% end %>
-  </ul>
-<% end %>
+<%= render "search_results"%>

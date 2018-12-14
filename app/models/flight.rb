@@ -1,4 +1,6 @@
 class Flight < ApplicationRecord
+  scope :distinct_dates, -> {select("distinct start")}
+  scope :ascending_dates, -> {order("start")}
   belongs_to :origin, class_name: "Airport"
   belongs_to :destination, class_name: "Airport"
 
