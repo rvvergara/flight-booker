@@ -4,7 +4,9 @@
 <% if @flights.any? %>
   <ul>
     <% @flights.each do |flight|%>
-      <li><%= flight.flight_code %></li>
+      <% if !flight.nil? %>
+        <li><%= flight.flight_code%></li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>

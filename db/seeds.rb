@@ -16,7 +16,7 @@ Airport.create(
 Flight.create(
   origin_id: 1,
   destination_id: 2,
-  start: Time.now + 5.days,
+  start: Date.parse((Time.now + 5.days).to_s),
   duration: 7,
   flight_code: "STOLA"
 )
@@ -24,7 +24,7 @@ Flight.create(
 Flight.create(
   origin_id: 1,
   destination_id: 3,
-  start: Time.now + 20.days,
+  start: Date.parse((Time.now + 20.days).to_s),
   duration: 7,
   flight_code: "STOJF"
 )
@@ -32,7 +32,7 @@ Flight.create(
 Flight.create(
   origin_id: 3,
   destination_id: 2,
-  start: Time.now + 15.days,
+  start: Date.parse((Time.now + 15.days).to_s),
   duration: 7,
   flight_code: "JTOLA"
 )
@@ -40,7 +40,7 @@ Flight.create(
 Flight.create(
   origin_id: 3,
   destination_id: 1,
-  start: Time.now + 10.days,
+  start: Date.parse((Time.now + 10.days).to_s),
   duration: 7,
   flight_code: "JTOSF"
 )

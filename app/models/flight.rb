@@ -11,7 +11,15 @@ class Flight < ApplicationRecord
   end
 
   def date_formatted
-    start.strftime("%m/%d/%Y")
+    start.strftime("%m-%d-%Y")
   end
 
+  def self.search_flights(origin, destination, start)
+    Flight.where("origin_id = ? AND destination_id = ? AND start = ?", origin, destination, Date.strptime(start, "%m-%d-%Y"))
+  end
+
+  private
+  def strip_time
+    Date.strptime(start.to_s, "%m-%d-%Y").to_time
+  end
 end
