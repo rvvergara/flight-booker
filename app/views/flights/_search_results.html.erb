@@ -1,12 +1,16 @@
 <% if !@flights.nil? %>
   <% if @flights.any? %>
     <ul>
-      <% @flights.each do |flight|%>
-        <% if !flight.nil? %>
-          <li>
-            <%= render partial: "flight_selection_form", locals:{flight:flight} %>
-          </li>
+      <%= form_for(:booking, url: new_booking_path, method: :get) do |f| %>
+        <%= f.hidden_field :passengers, value: params[:passenger_count]%>
+        <% @flights.each do |flight|%>
+          <% if !flight.nil? %>
+            <li>
+              <%= render partial: "flight_selection_form", locals:{flight:flight, f:f} %>
+            </li>
+          <% end %>
         <% end %>
+        <%= f.submit "Select Flight", class:"btn btn-warning btn-sm"%>
       <% end %>
     </ul>
   <% end %>

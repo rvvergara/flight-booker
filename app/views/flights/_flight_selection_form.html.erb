@@ -1,11 +1,4 @@
-<%= form_for(:booking, url: new_booking_path, method: :get) do |f| %>
   <div class="form-group">
     <%= f.label :chosen_flight, flight.flight_code %>
     <%= f.radio_button :chosen_flight, flight.id %>
   </div>
-  
-  <div class="form-group">
-    <%= f.hidden_field :passengers, value: params[:passenger_count]%>
-  </div>
-  <%= f.submit "Select Flight"%>
-<% end %>
