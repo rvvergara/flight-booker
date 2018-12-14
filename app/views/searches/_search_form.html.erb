@@ -1,0 +1,19 @@
+<%= form_for(:flight, url: flights_path, method: :get) do |f|%>
+  <div class="form-group">
+      <%= label_tag :origin, "From: " %>
+      <%= select_tag(:origin, options_for_select(@airports))%>
+    </div>
+    <div class="form-group">
+      <%= label_tag :destination, "To: " %>
+      <%= select_tag(:destination, options_for_select(@airports))%>
+    </div>
+  <div class="form-group">
+    <%= label_tag :passenger_count%>
+    <%= select_tag :passenger_count, options_for_select([1,2,3,4,5])%>
+  </div>
+  <div class="form-group">
+    <%= label_tag :date %>
+    <%= select_tag :date, options_for_select(@dates)%>
+  </div>
+  <%= f.submit "Search Flights", class:"btn btn-primary"%>
+<% end %>
