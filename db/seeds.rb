@@ -12,3 +12,10 @@ Airport.create(
   code: "JFK",
   name: "New York, John F Kennedy International Airport"
 )
+
+Flight.create(
+  origin_id: 1,
+  destination_id: 2,
+  start: Time.now + 5000,
+  end: Time.now + 3500000
+)
