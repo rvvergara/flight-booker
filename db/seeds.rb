@@ -16,6 +16,28 @@ Airport.create(
 Flight.create(
   origin_id: 1,
   destination_id: 2,
-  start: Time.now + 5000,
-  end: Time.now + 3500000
+  start: Time.now + 5.days,
+  duration: 7
 )
+
+Flight.create(
+  origin_id: 1,
+  destination_id: 3,
+  start: Time.now + 20.days,
+  duration: 7
+)
+
+Flight.create(
+  origin_id: 3,
+  destination_id: 2,
+  start: Time.now + 15.days,
+  duration: 7
+)
+
+Flight.create(
+  origin_id: 3,
+  destination_id: 1,
+  start: Time.now + 10.days,
+  duration: 7
+)
+
