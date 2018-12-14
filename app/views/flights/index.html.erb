@@ -1,11 +1,19 @@
 <h1>Flights Here</h1>
 
-<%= form_for(:flight, url: flights_path, method: :get) do |f|%>
+<%= form_for(:flight, url: searches_path, method: :get) do |f|%>
+  <%= fields_for :airport do |builder|%>
+    <div class="form-group">
+      <%= builder.label :origin, "From: " %>
+      <%= builder.select(:origin, @airports)%>
+    </div>
+    <div class="form-group">
+      <%= builder.label :destination, "To: " %>
+      <%= builder.select(:destination, @airports)%>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= label_tag :date %>
-    <%= date_field_tag :date %>
-    <%= label_tag :time %>
-    <%= time_field_tag :time %>
-    <%= f.submit "Search Flights", class:"btn btn-primary"%>
+    <%= select_date Date.today, prefix: :start %>
   </div>
+  <%= f.submit "Search Flights", class:"btn btn-primary"%>
 <% end %>
