@@ -17,6 +17,10 @@ class Flight < ApplicationRecord
     joins(:destination).map {|flight| {flight.flight_code => flight.destination.name}}
   end
 
+  def Flight.dates
+    distinct_dates.ascending_dates.map {|flight| flight.date_formatted }
+  end
+
   def date_formatted
     start.strftime("%m-%d-%Y")
   end

@@ -62,15 +62,10 @@ RSpec.describe Flight do
     flight1 = Flight.find(2)
     flight1 = Flight.find(3)
 
-    context "distinct_dates scope and ascending dates scope" do
+    context "dates class method" do
       
-      it "returns list of distinct flight dates in ascending order" do  
-        time = "00:00:00 UTC +00:00"
-        expect(Flight.distinct_dates.count).to eql(4)
-      end
-
       it "returns an ascending list of distinct flight dates" do
-        expect(Flight.distinct_dates.ascending_dates[0].start).to eql(Flight.first.start)
+        expect(Flight.dates).to eql(Flight.find_by_sql("select distinct start from flights order by start").map {|flight| flight.date_formatted})
       end
     end
 
