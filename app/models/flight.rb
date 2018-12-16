@@ -10,11 +10,11 @@ class Flight < ApplicationRecord
   validates :flight_code, presence: true, uniqueness: true
 
   def self.origins
-    joins(:origin).map {|flight| flight.origin.name}
+    joins(:origin).map {|flight| {flight.flight_code => flight.origin.name}}
   end
 
   def self.destinations
-    joins(:destination).map {|flight| flight.destination.name}
+    joins(:destination).map {|flight| {flight.flight_code => flight.destination.name}}
   end
 
   def date_formatted
