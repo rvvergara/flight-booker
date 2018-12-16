@@ -1,21 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe Airport, type: :model do
-  airport = Airport.new
-  airport.name = "My own airport"
-  it "is not valid without a code" do
-    expect(airport).not_to be_valid
-  end
-
-  it "is not valid without a name" do
-    airport.code = "MYO"
-    airport.name = ""
-    expect(airport).not_to be_valid
-  end
-
-  it "is valid with complete information" do
-    airport.name = "My Own Hangar"
-
+  
+  it "is valid with a code and name" do
+    airport = Airport.new(
+      code: "LUM",
+      name: "Lumbia International Airport"
+    )
     expect(airport).to be_valid
+  end
+
+  it "is invalid without a code" do
+    airport = Airport.new(code: nil)
+    airport.valid?
+    expect(airport.errors[:code]).to include("can't be blank")
+  end
+
+  it "is invalid without a name" do
+    airport = Airport.new(name: nil)
+    airport.valid?
+    expect(airport.errors[:name]).to include("can't be blank")
+  end
+
+  it "is invalid with a duplicate code" do
+    Airport.create(
+      code: "BAC",
+      name: "Bacolod International Airport"
+    )
+    airport = Airport.new(
+      code: "BAC",
+      name: "Mainland International"
+    )
+    airport.valid?
+    expect(airport.errors[:code]).to include("has already been taken")
+  end
+  it "returns an ascending list of airport codes" do
+    expect(Airport.ascending_codes.map {|airport| airport.code}).to eql(["BAC", "MNL"])
   end
 end
