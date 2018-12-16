@@ -31,7 +31,7 @@ RSpec.describe FlightsController do
           destination: destination_code,
           date: flight_date
         }
-        expect(assigns(:flights).map {|flight| flight.flight_code}).to match_array([Flight.first.flight_code])
+        expect(assigns(:flights)).to match_array(Flight.search_flights(Flight.first.origin_id, Flight.first.destination_id,flight_date))
       end
     end
 
