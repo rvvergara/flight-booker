@@ -23,7 +23,11 @@ RSpec.describe Airport, type: :model do
     end
   
     it "is invalid with a duplicate code" do
-      airport.code = "JFK"
+      Airport.create(
+        code: "BAC",
+        name: "Bacolod Airport"
+      )
+      airport.code = "BAC"
       airport.valid?
       expect(airport.errors[:code]).to include("has already been taken")
     end  
