@@ -2,8 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Airport, type: :model do
   
+  describe "factories" do
+    it "has a valid factory" do
+      expect(FactoryBot.build(:airport)).to be_valid
+    end
+  end
+
   describe "validations" do
-    airport = Airport.new
+    airport = FactoryBot.build(:airport)
     it "is valid with a code and name" do
       airport.code = "LUM"
       airport.name = "Lumbia International Airport"
@@ -23,10 +29,7 @@ RSpec.describe Airport, type: :model do
     end
   
     it "is invalid with a duplicate code" do
-      Airport.create(
-        code: "BAC",
-        name: "Bacolod Airport"
-      )
+      FactoryBot.create(:airport, code:"BAC", name:"Bacolod Airport")
       airport.code = "BAC"
       airport.valid?
       expect(airport.errors[:code]).to include("has already been taken")

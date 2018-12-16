@@ -2,8 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Flight do
   
+  describe "factories" do
+    it "has a valid factory" do
+      expect(FactoryBot.build(:flight)).to be_valid
+    end
+  end
+
   describe "validations" do
-    flight = Flight.new
+    flight = FactoryBot.build(:flight)
     it "is valid with an origin_id, destination_id, start and duration" do
       flight.origin_id = 1
       flight.destination_id = 2
