@@ -3,6 +3,11 @@ class Flight < ApplicationRecord
   scope :ascending_dates, -> {order("start")}
   belongs_to :origin, class_name: "Airport"
   belongs_to :destination, class_name: "Airport"
+  validates :origin_id, presence: true
+  validates :destination_id, presence: true
+  validates :start, presence: true
+  validates :duration, presence: true
+  validates :flight_code, presence: true, uniqueness: true
 
   def self.origins
     joins(:origin).map {|flight| flight.origin.name}
