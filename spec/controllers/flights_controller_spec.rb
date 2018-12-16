@@ -1,5 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe FlightsController, type: :controller do
-
+RSpec.describe FlightsController do
+  describe "GET #index" do
+    
+  end
 end

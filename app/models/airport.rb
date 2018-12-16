@@ -5,4 +5,8 @@ class Airport < ApplicationRecord
   has_many :arriving_flights, foreign_key: :destination_id, class_name: "Flight"
   validates :code, presence: true, uniqueness: true
   validates :name, presence: true
+
+  def Airport.list
+    distinct_airports.ascending_codes.map {|airport| airport.code}
+  end
 end
