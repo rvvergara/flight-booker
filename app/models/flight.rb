@@ -21,6 +21,10 @@ class Flight < ApplicationRecord
     distinct_dates.ascending_dates.map {|flight| flight.date_formatted }
   end
 
+  def Flight.codes
+    select("flight_code").map{|flight| flight.flight_code}
+  end
+
   def date_formatted
     start.strftime("%m-%d-%Y")
   end

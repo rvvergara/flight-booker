@@ -57,6 +57,7 @@ group :development, :test do
 
   # Rspec rails
   gem 'rspec-rails', '~> 3.8'
+  gem 'rails-controller-testing'
 end
 
 group :test do
@@ -67,6 +68,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'launchy'
 end
 
 group :development do
