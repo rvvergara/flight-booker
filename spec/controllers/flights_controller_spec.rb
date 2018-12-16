@@ -16,7 +16,7 @@ RSpec.describe FlightsController do
 
       it "shows a dropdown of distinct flight dates" do
         get :index
-        expect(Flight.dates).to match_array(Flight.all.map {|flight| flight.date_formatted})
+        expect(assigns(:dates)).to match_array(Flight.all.map {|flight| flight.date_formatted})
       end
     end
 
