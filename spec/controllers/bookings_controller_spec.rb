@@ -37,7 +37,7 @@ RSpec.describe BookingsController do
     it "assigns @booking to a new instance of Booking" do
       expect(booking).to be_a_new(Booking)
     end
-
+    
   end
 
 end
