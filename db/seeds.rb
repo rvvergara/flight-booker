@@ -45,3 +45,17 @@ Flight.create(
   flight_code: "JTOSF"
 )
 
+4.times do |i|
+  Booking.create(
+    flight_id: i,
+    passenger_count: i + 1 
+  )
+end
+
+4.times do |i|
+  Passenger.create(
+    booking_id: i,
+    name: Faker::Name.name,
+    email: Faker::Internet.email
+  )
+end
