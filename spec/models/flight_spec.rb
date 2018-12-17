@@ -96,5 +96,16 @@ RSpec.describe Flight do
       end
     end
   
-  end  
+  end
+  describe "associations with bookings and passengers" do
+    flight = FactoryBot.build(:flight)
+
+    booking1 = FactoryBot.build(:booking, flight_id: flight.id)
+
+    booking2 = FactoryBot.build(:booking, flight_id: flight.id)
+
+    it "shows how many passengers it has" do
+      expect(flight.passengers.count).to eql(booking1.passengers.count + booking2.passengers.count)
+    end
+  end
 end
