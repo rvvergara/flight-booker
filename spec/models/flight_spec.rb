@@ -58,9 +58,9 @@ RSpec.describe Flight do
   end
 
   describe "Flight class methods" do
-    flight1 = Flight.find(1)
-    flight1 = Flight.find(2)
-    flight1 = Flight.find(3)
+    flight1 = Flight.find_by(id:1)
+    flight1 = Flight.find_by(id:1)
+    flight1 = Flight.find_by(id:3)
 
     context "dates class method" do
       

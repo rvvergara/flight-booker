@@ -47,8 +47,7 @@ Flight.create(
 
 4.times do |i|
   Booking.create(
-    flight_id: i,
-    passenger_count: i + 1 
+    flight_id: i
   )
 end
 
