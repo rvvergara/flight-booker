@@ -14,7 +14,7 @@
   <strong>Arriving at: </strong><%= @flight.destination.name %>
 </p>
 
-<h5>Passengers Information:</h5>
+<h5>Passengers Information: <%= link_to "Edit Info", edit_booking_path(@booking), class: "btn btn-primary btn-sm" %></h5>
 <ul>
   <% @passengers.each do |passenger| %>
     <li>

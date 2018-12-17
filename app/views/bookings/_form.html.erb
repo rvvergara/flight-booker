@@ -1,0 +1,24 @@
+<%= @flight.flight_code %>
+
+<%= form_for @booking do |f|%>
+  <div class="form-group">
+   <%= f.hidden_field :flight_id, value: @flight.id%> 
+  </div>
+  <h4>Passenger Information:</h4>
+  <ul>
+    <%= f.fields_for :passengers do |p| %>
+      <li>
+        <h5>Passenger</h5>
+        <div class="form-group">
+          <%= p.label :name %>
+          <%= p.text_field :name, class: "form-control"%>
+        </div>
+        <div class="form-group">
+          <%= p.label :email %>
+          <%= p.email_field :email, class: "form-control"%>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%= f.submit %>
+<% end %>
