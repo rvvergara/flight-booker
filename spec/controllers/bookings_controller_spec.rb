@@ -38,6 +38,57 @@ RSpec.describe BookingsController do
       expect(booking).to be_a_new(Booking)
     end
     
+    it "assigns each passenger to an instance of Passenger" do
+      booking.passengers.each do |passenger|
+        expect(passenger).to be_a_new(Passenger)
+      end
+    end
+  end
+
+  describe "POST #create" do
+    before :each do
+      @passengers = [
+        FactoryBot.attributes_for(:passenger),
+        FactoryBot.attributes_for(:passenger),
+        FactoryBot.attributes_for(:passenger)
+      ]
+      @invalid_passengers = [
+        FactoryBot.attributes_for(:invalid_passenger)
+      ]
+    end
+
+    context "with valid attributes" do
+      
+      it "saves the new booking to the database" do
+        expect{
+          post :create, params:{booking: FactoryBot.attributes_for(:booking, passengers_attributes: @passengers)}}.to change(Booking, :count).by(1)
+      end
+
+      it "redirects to bookings#show" do
+        post :create, params: {
+          booking: FactoryBot.attributes_for(:booking, passengers_attributes: @passengers)
+        }
+        expect(response).to redirect_to booking_path(assigns[:booking])
+      end
+    end
+
+    context "invalid attributes" do
+    
+      it "does not save new booking in the database" do
+        expect{
+          post :create, params:{booking: FactoryBot.attributes_for(:booking, passengers_attributes: @invalid_passengers)}
+        }.to_not change(Booking, :count)
+      end
+
+      it "re-renders new template" do
+        post :create, params: {
+          booking: FactoryBot.attributes_for(:booking, passengers_attributes: @invalid_passengers)
+        }
+        expect(response).to render_template("new")
+      end
+
+    end
+
   end
 
 end
