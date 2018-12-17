@@ -19,6 +19,18 @@ class BookingsController < ApplicationController
     @flight = @booking.flight
   end
 
+  def update
+    @booking = Booking.find_by(id:params[:id])
+    @passengers = @booking.passengers
+
+    if @booking.update(booking_params)
+      redirect_to @booking
+    else
+      @flight = Flight.find_by(id: @booking.flight.id)
+      render "edit"
+    end
+  end
+
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
@@ -31,6 +43,6 @@ class BookingsController < ApplicationController
 
   private
   def booking_params
-    params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email])
+    params.require(:booking).permit(:flight_id, passengers_attributes: [:id,:name, :email])
   end
 end

@@ -1,7 +1,7 @@
 class Flight < ApplicationRecord
   scope :distinct_dates, -> {select("distinct start")}
   scope :ascending_dates, -> {order("start")}
-  has_many :bookings
+  has_many :bookings, dependent: :destroy
   has_many :passengers, through: :bookings
   belongs_to :origin, class_name: "Airport"
   belongs_to :destination, class_name: "Airport"
