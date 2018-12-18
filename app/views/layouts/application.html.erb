@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FlightBooker</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,7 +10,14 @@
   </head>
 
   <body>
-    <%= yield %>
-    <%= debug(params) if Rails.env.development? %>
+    <div class="container">
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%=type%>">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= yield %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
   </body>
 </html>
