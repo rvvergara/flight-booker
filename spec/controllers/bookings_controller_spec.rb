@@ -2,6 +2,34 @@ require 'rails_helper'
 
 RSpec.describe BookingsController do
 
+  describe "GET #show" do
+    booking = Booking.first
+    flight = booking.flight
+    origin_airport = flight.origin.name
+    destination_airport = flight.destination.name
+    passengers = booking.passengers
+
+    parameters = {params: {
+      id: booking.id.to_s
+    }}
+
+    before :each do
+      get :show, parameters
+    end
+
+    it "renders the show template" do
+      expect(response).to render_template(:show)
+    end
+
+    it "assigns the booking corresponding to params[:id] to @booking" do
+      expect(assigns(:booking)).to eq(booking)
+    end
+
+    it "assigns to @flight what corresponds to @booking.flight" do
+      expect(assigns(:flight)).to eq(flight)
+    end
+  end
+
   describe "GET #new" do
     flight = FactoryBot.create(:flight)
     booking = FactoryBot.build(:booking, flight_id: flight.id)
@@ -94,6 +122,11 @@ RSpec.describe BookingsController do
     flight = booking.flight
     parameters = {params: {id: booking.id}}
     it "assigns requested booking to @booking" do
+      get :edit, parameters
+      expect(assigns(:booking)).to eq(booking)
+    end
+
+    it "assigns the corresponding booking to @booking" do
       get :edit, parameters
       expect(assigns(:booking)).to eq(booking)
     end
