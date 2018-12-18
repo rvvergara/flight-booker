@@ -16,10 +16,10 @@
 </p>
 
 <h5>Passengers Information: <%= link_to "Edit Info", edit_booking_path(@booking), class: "btn btn-primary btn-sm" %></h5>
-<ul>
+<ol class="list-group">
   <% @passengers.each do |passenger| %>
-    <li>
+    <li class="list-group-item my-2 no-bg">
       <%= passenger.name %> - <%= passenger.email %>
     </li>
   <% end %>
-</ul>
+</ol>
