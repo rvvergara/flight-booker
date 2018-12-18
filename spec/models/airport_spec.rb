@@ -38,7 +38,7 @@ RSpec.describe Airport, type: :model do
 
   describe "list class method" do
     it "returns an ascending list of distinct airport codes" do
-      expect(Airport.list.first[1]).to eql(Airport.all.map{|a| a.code}.sort.first)
+      expect(Airport.list).to match_array(Airport.all.map{|a| [a.name, a.code]})
     end
   end
 end

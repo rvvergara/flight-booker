@@ -39,8 +39,4 @@ class Flight < ApplicationRecord
     Flight.where("origin_id = ? AND destination_id = ? AND start = ?", origin, destination, Date.strptime(start, "%m-%d-%Y"))
   end
 
-  private
-  def strip_time
-    Date.strptime(start.to_s, "%m-%d-%Y").to_time
-  end
 end
