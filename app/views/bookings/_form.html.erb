@@ -5,7 +5,7 @@
    <%= f.hidden_field :flight_id, value: @flight.id%> 
   </div>
   <h4>Passenger Information:</h4>
-  <ul>
+  <ol>
     <%= f.fields_for :passengers do |p| %>
       <li>
         <h5>Passenger</h5>
@@ -19,6 +19,6 @@
         </div>
       </li>
     <% end %>
-  </ul>
+  </ol>
   <%= f.submit %>
 <% end %>
