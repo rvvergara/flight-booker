@@ -1,13 +1,22 @@
-<%= @flight.flight_code %>
+<div class="row">
+  <div class="col-md-6">
+    <h5>Flight Code: <%= @flight.flight_code %></h5>
+  </div>
+  <div class="col-md-6">
+    <p>Departure Date: <strong><%= @flight.date_formatted_with_wkday %></strong></p>
+    <p>From: <strong><%= @flight.origin.name%></strong></p>
+    <p>To: <strong><%= @flight.destination.name%></strong></p>
+  </div>
+</div>
 
 <%= form_for @booking do |f|%>
   <div class="form-group">
    <%= f.hidden_field :flight_id, value: @flight.id%> 
   </div>
   <h4>Passenger Information:</h4>
-  <ol>
+  <ol class="list-group">
     <%= f.fields_for :passengers do |p| %>
-      <li>
+      <li class="list-group-item my-3">
         <h5>Passenger</h5>
         <div class="form-group">
           <%= p.label :name %>
@@ -20,5 +29,5 @@
       </li>
     <% end %>
   </ol>
-  <%= f.submit %>
+  <%= f.submit "Book Flight", class:"btn btn-primary" %>
 <% end %>

@@ -1,1 +1,6 @@
-@import 'bootstrap'
+@import 'bootstrap';
+
+.list-group-item {
+  background: lightblue;
+  border-radius: 10px;
+}
