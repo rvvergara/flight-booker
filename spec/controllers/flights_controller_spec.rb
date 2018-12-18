@@ -27,10 +27,12 @@ RSpec.describe FlightsController do
         flight_date = Flight.first.date_formatted
         
         get :index, params: {
-          origin: origin_code.to_s,
-          destination: destination_code.to_s,
+          origin: origin_code,
+          destination: destination_code,
+          passenger_count: 3,
           date: flight_date
         }
+        
         expect(assigns(:flights)).to match_array(Flight.search_flights(Flight.first.origin_id, Flight.first.destination_id,flight_date))
       end
     end
