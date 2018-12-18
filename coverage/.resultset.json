@@ -1,10 +1,11 @@
 {
   "RSpec": {
     "coverage": {
-      "/media/rvvergara/Data/Learning/Web Development and Software Engineering/Courses/Microverse/projects/ruby-projects/flight-booker/spec/features/user_visits_home_spec.rb": [
+      "/media/rvvergara/Data/Learning/Web Development and Software Engineering/Courses/Microverse/projects/ruby-projects/flight-booker/spec/features/flight_search_spec.rb": [
         1,
         null,
         1,
+        null,
         1,
         5,
         null,
@@ -31,18 +32,12 @@
         null,
         null,
         1,
-        null,
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        1,
-        1,
+        2,
+        2,
+        2,
+        2,
+        2,
         null,
         null,
         1,
@@ -50,11 +45,12 @@
         1,
         1,
         1,
-        1,
-        1,
+        null,
+        null,
         null,
         1,
-        null,
+        1,
+        1,
         null,
         null,
         null
@@ -584,6 +580,6 @@
         null
       ]
     },
-    "timestamp": 1545126737
+    "timestamp": 1545127042
   }
 }
