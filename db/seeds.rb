@@ -23,6 +23,14 @@ Flight.create(
 
 Flight.create(
   origin_id: 1,
+  destination_id: 2,
+  start: Date.parse((Time.now + 5.days).to_s),
+  duration: 7,
+  flight_code: "STOLA2"
+)
+
+Flight.create(
+  origin_id: 1,
   destination_id: 3,
   start: Date.parse((Time.now + 20.days).to_s),
   duration: 7,
@@ -45,16 +53,3 @@ Flight.create(
   flight_code: "JTOSF"
 )
 
-# 4.times do |i|
-#   Booking.create(
-#     flight_id: i
-#   )
-# end
-
-# 4.times do |i|
-#   Passenger.create(
-#     booking_id: i,
-#     name: Faker::Name.name,
-#     email: Faker::Internet.email
-#   )
-# end

@@ -65,7 +65,7 @@ RSpec.describe Flight do
     context "dates class method" do
       
       it "returns an ascending list of distinct flight dates" do
-        expect(Flight.dates).to eql(Flight.find_by_sql("select distinct start from flights order by start").map {|flight| [flight.date_formatted_with_wkday, flight.date_formatted]})
+        expect(Flight.dates).to match_array(Flight.find_by_sql("select start from flights order by start").map {|flight| [flight.date_formatted_with_wkday, flight.date_formatted]})
       end
     end
 
