@@ -1,11 +1,11 @@
 <% if !@flights.nil? %>
   <% if @flights.any? %>
-    <ul>
+    <ul class="list-group">
       <%= form_for(:booking, url: new_booking_path, method: :get) do |f| %>
         <%= f.hidden_field :passengers, value: params[:passenger_count]%>
         <% @flights.each do |flight|%>
           <% if !flight.nil? %>
-            <li>
+            <li class="list-group-item">
               <%= render partial: "flight_selection_form", locals:{flight:flight, f:f} %>
             </li>
           <% end %>

@@ -1,0 +1,21 @@
+<% if !@flights.nil? %>
+  <% if @flights.any? %>
+    <ul class="list-group">
+      <% @flights.each do |flight|%>
+      <li class="list-group-item">
+        <%= form_for(:booking, url: new_booking_path, method: :get) do |f|%>
+          <%= f.hidden_field :passengers, value: params[:passenger_count]%>
+          <%= f.hidden_field :origin, value: params[:origin] %>
+          <%= f.hidden_field :destination, value: params[:destination] %>
+          <%= f.hidden_field :date, value: params[:date] %>
+          <%= f.hidden_field :chosen_flight, value: flight.id %>
+          <% if !flight.nil? %>
+            <%= render partial: "alt_flight_selection_form", locals:{flight: flight, f:f}%>
+          <% end %>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
