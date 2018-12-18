@@ -1,5 +1,5 @@
 class Flight < ApplicationRecord
-  scope :distinct_dates, -> {select("distinct start")}
+  scope :distinct_dates, -> {select("distinct *")}
   scope :ascending_dates, -> {order("start")}
   has_many :bookings, dependent: :destroy
   has_many :passengers, through: :bookings
@@ -20,7 +20,7 @@ class Flight < ApplicationRecord
   end
 
   def Flight.dates
-    distinct_dates.ascending_dates.map {|flight| flight.date_formatted }
+    distinct_dates.ascending_dates.map {|flight| [flight.date_formatted_with_wkday, flight.date_formatted] }
   end
 
   def Flight.codes
@@ -29,6 +29,10 @@ class Flight < ApplicationRecord
 
   def date_formatted
     start.strftime("%m-%d-%Y")
+  end
+
+  def date_formatted_with_wkday
+    start.strftime("%A #{Date::MONTHNAMES[start.month]}-%d-%Y")
   end
 
   def self.search_flights(origin, destination, start)
