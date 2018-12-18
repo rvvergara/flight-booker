@@ -69,6 +69,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
   gem 'launchy'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :development do
