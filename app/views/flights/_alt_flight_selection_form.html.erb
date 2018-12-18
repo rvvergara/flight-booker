@@ -1,4 +1,13 @@
   <div class="form-group">
-    <%= f.label :chosen_flight, flight.flight_code %>
-    <%= f.submit "Select Flight", class:"btn btn-warning btn-sm"%>
+    <div class="row">
+      <div class="col-3">
+        <%= flight.flight_code %>  
+      </div>
+      <div class="col-6">
+        <span>Leaves on: <%= flight.date_formatted_with_wkday %></span>
+      </div>
+      <div class="col-3">
+        <%= f.submit "Select Flight", class:"btn btn-warning btn-sm ml-md-5"%>  
+      </div>
+    </div>
   </div>

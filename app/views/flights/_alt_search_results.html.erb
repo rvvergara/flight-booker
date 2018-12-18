@@ -2,7 +2,7 @@
   <% if @flights.any? %>
     <ul class="list-group">
       <% @flights.each do |flight|%>
-      <li class="list-group-item">
+      <li class="list-group-item mt-2">
         <%= form_for(:booking, url: new_booking_path, method: :get) do |f|%>
           <%= f.hidden_field :passengers, value: params[:passenger_count]%>
           <%= f.hidden_field :origin, value: params[:origin] %>
