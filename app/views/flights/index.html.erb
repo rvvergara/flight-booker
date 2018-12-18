@@ -1,5 +1,5 @@
 <%= provide(:title, @title)%>
-<h1>Flights Booking</h1>
+<h1 class="text-primary">Flights Booking</h1>
 
 <div class="row">
   <div class="col-md-4">
@@ -8,6 +8,8 @@
   <div class="col-md-8">
     <% if search_on? && @flights.any? %>
       <%= render "alt_search_results"%>  
+    <% else %>
+      <%= render "home" %>
     <% end %>
   </div>
 </div>
