@@ -1,15 +1,15 @@
 <%= form_for(:flight, url: flights_path, method: :get) do |f|%>
   <div class="form-group">
       <%= label_tag :origin, "From: " %>
-      <%= select_tag(:origin, options_for_select(@airports))%>
+      <%= select_tag(:origin, options_for_select(@airports, @selected_origin))%>
     </div>
     <div class="form-group">
       <%= label_tag :destination, "To: " %>
-      <%= select_tag(:destination, options_for_select(@airports))%>
+      <%= select_tag(:destination, options_for_select(@airports, @selected_destination))%>
     </div>
   <div class="form-group">
     <%= label_tag :passenger_count%>
-    <%= select_tag :passenger_count, options_for_select([1,2,3,4,5])%>
+    <%= select_tag :passenger_count, options_for_select([1,2,3,4,5], @passenger_count)%>
   </div>
   <div class="form-group">
     <%= label_tag :date %>

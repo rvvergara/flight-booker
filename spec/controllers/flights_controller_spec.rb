@@ -11,7 +11,7 @@ RSpec.describe FlightsController do
 
       it "shows 2 dropdown lists of airports in descending order" do
         get :index
-        expect(assigns(:airports)).to match_array(Airport.all.map {|a| a.code})
+        expect(assigns(:airports)).to match_array(Airport.all.map {|a| [a.name, a.code]})
       end
 
       it "shows a dropdown of distinct flight dates" do
@@ -27,8 +27,8 @@ RSpec.describe FlightsController do
         flight_date = Flight.first.date_formatted
         
         get :index, params: {
-          origin: origin_code,
-          destination: destination_code,
+          origin: origin_code.to_s,
+          destination: destination_code.to_s,
           date: flight_date
         }
         expect(assigns(:flights)).to match_array(Flight.search_flights(Flight.first.origin_id, Flight.first.destination_id,flight_date))
