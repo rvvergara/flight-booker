@@ -52,4 +52,3 @@ Flight.create(
   duration: 7,
   flight_code: "JTOSF"
 )
-

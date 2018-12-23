@@ -3,17 +3,17 @@ require 'rails_helper'
 RSpec.describe BookingsController do
 
   describe "GET #show" do
-    booking = Booking.first
-    flight = booking.flight
-    origin_airport = flight.origin.name
-    destination_airport = flight.destination.name
-    passengers = booking.passengers
+    before :each do
+    @booking = FactoryBot.create(:booking)
+    @flight = @booking.flight
+    @origin_airport = @flight.origin.name
+    @destination_airport = @flight.destination.name
+    passengers = @booking.passengers
 
     parameters = {params: {
-      id: booking.id.to_s
+      id: @booking.id.to_s
     }}
 
-    before :each do
       get :show, parameters
     end
 
@@ -22,52 +22,51 @@ RSpec.describe BookingsController do
     end
 
     it "assigns the booking corresponding to params[:id] to @booking" do
-      expect(assigns(:booking)).to eq(booking)
+      expect(assigns(:booking)).to eq(@booking)
     end
 
     it "assigns to @flight what corresponds to @booking.flight" do
-      expect(assigns(:flight)).to eq(flight)
+      expect(assigns(:flight)).to eq(@flight)
     end
   end
 
   describe "GET #new" do
-    flight = FactoryBot.create(:flight)
-    booking = FactoryBot.build(:booking, flight_id: flight.id)
-    passenger_count = booking.passengers.count
-    parameters = {
-      params: {
-        booking: {
-          chosen_flight: flight.id,
-          passengers: passenger_count,
+    before :each do
+      @flight = FactoryBot.create(:flight)
+      @booking = FactoryBot.build(:booking, flight_id: @flight.id)
+      @passenger_count = @booking.passengers.count
+      parameters = {
+        params: {
+          booking: {
+            chosen_flight: @flight.id,
+            passengers: @passenger_count,
+          }
         }
       }
-    }
-    it "returns http success" do
       get :new, parameters
+    end
+    it "returns http success" do
       expect(response).to have_http_status(:success)
     end
 
     it "renders the new bookings template" do
-      get :new, parameters
       expect(response).to render_template("new") 
     end
 
     it "assigns to @flight the chosen flight" do
-      get :new, parameters
-      expect(assigns(:flight)).to eql(flight)
+      expect(assigns(:flight)).to eql(@flight)
     end
 
     it "assigns to @passenger_count the number of passengers in parameters" do
-      get :new, parameters
-      expect(assigns(:passenger_count)).to eql(passenger_count)
+      expect(assigns(:passenger_count)).to eql(@passenger_count)
     end
 
     it "assigns @booking to a new instance of Booking" do
-      expect(booking).to be_a_new(Booking)
+      expect(@booking).to be_a_new(Booking)
     end
     
     it "assigns each passenger to an instance of Passenger" do
-      booking.passengers.each do |passenger|
+      @booking.passengers.each do |passenger|
         expect(passenger).to be_a_new(Passenger)
       end
     end
@@ -118,57 +117,50 @@ RSpec.describe BookingsController do
   end
 
   describe "GET #edit" do
-    booking = FactoryBot.create(:booking)
-    flight = booking.flight
-    parameters = {params: {id: booking.id}}
-    it "assigns requested booking to @booking" do
+    before :each do
+      @booking = FactoryBot.create(:booking)
+      @flight = @booking.flight
+      parameters = {params: {id: @booking.id}}
       get :edit, parameters
-      expect(assigns(:booking)).to eq(booking)
     end
 
-    it "assigns the corresponding booking to @booking" do
-      get :edit, parameters
-      expect(assigns(:booking)).to eq(booking)
+    it "assigns requested booking to @booking" do
+      expect(assigns(:booking)).to eq(@booking)
     end
 
     it "assigns the corresponding flight to @flight" do
-      get :edit, parameters
-      expect(assigns(:flight)).to eq(flight)
+      expect(assigns(:flight)).to eq(@flight)
     end
 
     it "renders the :edit template" do
-      get :edit, parameters
       expect(response).to render_template(:edit)
     end
   end
 
-  # describe "PATCH #update" do
-  #   before :each do
-  #     @flight = Flight.first
-  #     @booking = Booking.create(flight_id: @flight.id, passengers_attributes: [FactoryBot.attributes_for(:passenger)])
-  #     @passenger = @booking.passengers.first
-  #   end
+  describe "PATCH #update" do
+    before :each do
+      @booking = FactoryBot.create(:booking)
+      @flight = @booking.flight
+      @passenger = @booking.passengers.first
 
-  #   context "valid attributes" do
-  #     it "locates requested @booking" do
-  #       patch :update, params: {
-  #         id: @booking.id,
-  #         booking: FactoryBot.attributes_for(:booking)
-  #       }
-  #       expect(assigns(:booking)).to eq(@booking)
-  #     end
+      parameters = {params:{id: @booking.id, booking: FactoryBot.attributes_for(:booking, flight_id: @flight.id, passengers_attributes: [FactoryBot.attributes_for(:passenger, name: "Edward Peters")])}}
 
-  #     it "changes @booking's attributes" do
-  #       patch :update, params: {
-  #         id: @booking.id,
-  #         booking: FactoryBot.attributes_for(:booking, passengers_attributes: [FactoryBot.attributes_for(:passenger)])
-  #       }
-  #       @booking.reload
-  #       expect(@booking.passengers.first.name).to_not eq(@passenger.name)
-  #       expect(@booking.passengers.count).to eq(1)
-  #     end
+      patch :update, parameters
+    end
 
-  #   end
+    context "valid attributes" do
+      it "locates requested @booking" do
+        expect(assigns(:booking)).to eq(@booking)
+      end
 
-  # end
+      # it "changes @booking's attributes" do
+      #   @booking.reload
+      #   # expect(@booking.passengers.first.name).to_not eq(@passenger.name)
+      #   expect(@booking.passengers.count).to eq(1)
+      # end
+
+    end
+
+  end
+
 end
