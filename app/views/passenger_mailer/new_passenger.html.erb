@@ -1,0 +1,20 @@
+<h3>Hi, <%= @passenger.name%>!</h3>
+
+<p>You are booked to flight <%= @flight.flight_code %>
+</p>
+
+<p>
+  Your destination airport: <%= @flight.destination.name %>
+</p>
+
+<p>
+  Your origin airport: <%= @flight.origin.name%>
+</p>
+
+<p>
+  Your flight date: <%= @flight.start %>
+</p>
+
+<p>
+  <%= link_to "View details here", booking_url(@booking) %>
+</p>

@@ -1,0 +1,11 @@
+Hi, <%= @passenger.name%>!
+
+You are booked to flight <%= @flight.flight_code %>
+
+Your destination airport: <%= @flight.destination.name %>
+
+Your origin airport: <%= @flight.origin.name%>
+
+Your flight date: <%= @flight.start %>
+
+View these details at: <%= booking_url(@booking) %>
